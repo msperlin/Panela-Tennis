@@ -1,0 +1,13 @@
+name: PanelaTenis
+title: PanelaTenis
+username:
+account: msperlin
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1345405
+bundleId: 4546627
+url: https://msperlin.shinyapps.io/PanelaTenis/
+when: 1619962010.70747
+lastSyncTime: 1619962010.70748
+asMultiple: FALSE
+asStatic: FALSE
