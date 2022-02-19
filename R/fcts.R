@@ -1,8 +1,10 @@
 get_ss_data <- function() {
-  require(googlesheets)
+  require(googlesheets4)
   
-  my_ss <- gs_key('1WgWcxax8SlO7RhzjgJ01seWu-LFtFcZY7SZW3ywposg', visibility = 'public' )
-  df <- gs_read(my_ss, col_types = readr::cols())
+  gs4_deauth()
+  
+  gs_link <- "https://docs.google.com/spreadsheets/d/1WgWcxax8SlO7RhzjgJ01seWu-LFtFcZY7SZW3ywposg/edit#gid=2145784303"
+  df <- read_sheet(gs_link )
   
   return(df)
   
@@ -29,7 +31,7 @@ do_n_games_plot <- function(df_games, input) {
          y = '',
          title = paste0('Número de Jogos por Paneleiro (', input$ref_year, ')'),
          subtitle = paste0('Último jogo registrado em ', 
-                           max(lubridate::dmy_hms(df_games$`Carimbo de data/hora` ))) ) + 
+                           max(lubridate::ymd_hms(df_games$`Carimbo de data/hora` ))) ) + 
     theme_bw(base_size = 15) + geom_image(aes(image = image), size = 0.065)
   
   return(p)
@@ -56,7 +58,7 @@ do_net_games_plot <- function(df_games, input) {
          y = 'Saldo de Games',
          title = paste0('Panorama do Saldo de Games (', input$ref_year, ')'),
          subtitle = paste0('Último jogo registrado em ', 
-                           max(lubridate::dmy_hms(df_games$`Carimbo de data/hora`))) ) + 
+                           max(lubridate::ymd_hms(df_games$`Carimbo de data/hora`))) ) + 
     theme_bw(base_size = 15)
   
   return(p)
@@ -84,7 +86,7 @@ do_net_sets_plot <- function(df_games, input) {
          y = 'Saldo de Sets',
          title = paste0('Panorama do Saldo de Sets (', input$ref_year, ')'),
          subtitle = paste0('Último jogo registrado em ', 
-                           max(lubridate::dmy_hms(df_games$`Carimbo de data/hora`))) ) + 
+                           max(lubridate::ymd_hms(df_games$`Carimbo de data/hora`))) ) + 
     theme_bw(base_size = 15)
   
   return(p)
@@ -113,7 +115,7 @@ do_vic_loss_plot <- function(df_games, input) {
          y = 'Percentagem de Vitórias',
          title = paste0('Panorama da Percentagem de Vitórias (', input$ref_year, ')'),
          subtitle = paste0('Último jogo registrado em ', 
-                           max(lubridate::dmy_hms(df_games$`Carimbo de data/hora`))) ) + 
+                           max(lubridate::ymd_hms(df_games$`Carimbo de data/hora`))) ) + 
     theme_bw(base_size = 15) + 
     geom_text(aes(y = perc_vic, x = reorder(name, perc_vic),
                   label = paste0(n_victory, '|', n_games)), nudge_y = 0.05) + 
@@ -139,7 +141,7 @@ do_best_doubles_plot <- function() {
          y = 'Número de Vitórias',
          title = paste0('Vitórias por Dupla'),
          subtitle = paste0('Último jogo registrado em ', 
-                           max(lubridate::dmy_hms(df_games$`Carimbo de data/hora`))) ) + 
+                           max(lubridate::ymd_hms(df_games$`Carimbo de data/hora`))) ) + 
     theme_bw(base_size = 15) + 
     geom_text(aes(y = n_wins, x = reorder(name_double, n_wins),
                   label = paste0(n_wins, '|', n_games,

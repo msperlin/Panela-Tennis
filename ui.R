@@ -7,7 +7,7 @@ my_plot_width <- '750px'
 
 httr::set_config(httr::config(http_version = 0))
 df_games <- get_ss_data() %>%
-  mutate(ref_year = year(dmy(`Data da Panela`)))
+  mutate(ref_year = year(ymd(`Data da Panela`)))
 
 df_games <<- clean_up(df_games)
 

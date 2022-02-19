@@ -34,7 +34,7 @@ shinyServer(function(input, output, session) {
               df_summary$games_won, ' | ', df_summary$games_lost, ' | ', 
               df_summary$games_won - df_summary$games_lost),
             br(),
-            code('Dados atualizados em ', max(lubridate::dmy_hms(df_games$`Carimbo de data/hora`))),
+            code('Dados atualizados em ', max(lubridate::ymd_hms(df_games$`Carimbo de data/hora`))),
             
     ) 
     
